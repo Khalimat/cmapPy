@@ -17,10 +17,10 @@ logger = logging.getLogger()
 
 figure_dpi = 150
 
-
 ANNOTATION_KWARGS = dict(
         zorder=100
     )
+
 
 def stratogram(
     data,
@@ -89,7 +89,7 @@ def stratogram(
     n_cols = len(metrics)
     plt.figure(figsize=figsize, dpi=figure_dpi)
     gs = gridspec.GridSpec(n_rows, n_cols)
-    gs.update(wspace=0.0, hspace=0.0)
+    gs.update(wspace=0.05, hspace=0)
     
     # Count the total number of test compounds
     test_categories = [c for c in df[category_definition].dropna().unique() if is_test_category(c)]
@@ -181,6 +181,13 @@ def _add_annotation_reproducibility(ax, data, metric_label, col_id, row_id, thre
             **ANNOTATION_KWARGS
             )
     pass
+
+
+def set_axis_frame_color(ax, color):
+    ax.spines['bottom'].set_color(color)
+    ax.spines['top'].set_color(color) 
+    ax.spines['right'].set_color(color)
+    ax.spines['left'].set_color(color)
 
 
 def _add_annotation_recall(ax, data, metric_label, col_id, row_id, **kwargs):
@@ -308,7 +315,9 @@ def plot_row_of_histograms(
                 dict(fontfamily=font)
                 )
             add_annotations(plt.gca(), data, colname, col_id, row_id, **annotation_kwargs)
-            
+            set_axis_frame_color(plt.gca(), '#ffffff')
+            plt.gca().set_facecolor('#efefef')
+
                 
 def break_lines(s):
     '''Split a long phrase by putting the first word

@@ -25,6 +25,7 @@ class Test(unittest.TestCase):
             category_order="category_order",
             metrics=metrics,
             figsize=(20, 15),
+            bins=20,
             column_display_names=column_names,
             xtick_orientation="horizontal",
             ylabel_fontsize=15,
